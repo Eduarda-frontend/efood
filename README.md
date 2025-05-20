@@ -1,54 +1,66 @@
-# React + TypeScript + Vite
+# 🍕 Efood
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O **Efood** é uma aplicação web desenvolvida com React para facilitar pedidos em restaurantes.  
+O projeto foi criado como parte de estudos em desenvolvimento front-end, com foco em componentes reutilizáveis, navegação entre páginas e estilização com `styled-components`.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+- [React 19](https://reactjs.org/)
+- [React Router DOM 7](https://reactrouter.com/en/main)
+- [Styled Components](https://styled-components.com/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [ESLint](https://eslint.org/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 📦 Instalação e Uso
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Clone o repositório:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   ```bash
+   git clone https://github.com/Eduarda-frontend/efood.git
+   cd efood
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+2. Instale as dependências:
+   ```bash
+   npm install
+   
+3. Execute o projeto em modo de desenvolvimento:
+      ```bash
+   npm run dev
+
+5. Acesse no navegador
+
+## 📁 Estrutura Esperada do Projeto
+
+```bash
+efood/
+├── public/
+├── src/
+│   ├── assets/             # Imagens e arquivos estáticos
+│   ├── components/         # Componentes reutilizáveis da UI
+│   ├── pages/              # Páginas como Home, Cardápio, Checkout
+│   ├── routes/             # Arquivo de rotas com React Router
+│   ├── styles/             # Estilização global e temas
+│   └── main.tsx            # Ponto de entrada da aplicação
+├── .eslintrc.cjs
+├── index.html
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+````
+## 🧪 Funcionalidades
+
+- Listagem de restaurantes
+- Página de detalhes com pratos disponíveis
+- Adição e remoção de itens no carrinho
+- Interface responsiva
+
+## 🛠️ Scripts disponíveis
+
+- npm run dev – Inicia o servidor de desenvolvimento
+
+Exercicio ebac módulo 35
