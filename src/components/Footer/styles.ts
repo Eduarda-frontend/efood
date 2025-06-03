@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { colors } from "../../styles"
 
 export const FooterContain = styled.footer`
+    display: flex;
     height: 298px;
     background-color: ${colors.light_orange};
     color: ${colors.orange_rose};
@@ -20,6 +21,7 @@ export const FooterContain = styled.footer`
 `
 
 export const ListSocialMedia = styled.ul`
+    display: flex;
     justify-content: center;
     gap: 8px;
 

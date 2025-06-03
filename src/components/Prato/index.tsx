@@ -1,5 +1,5 @@
 import Tag from "../../Tag"
-import { Card, CardText, Star, InfoMain, Infos } from "./styles"
+import { Card, CardText, Star, InfoMain, Infos, Nota } from "./styles"
 
 import star from '../../assets/star.png'
 import Button from "../Button"
@@ -28,17 +28,17 @@ const Plate = ({
 
     <Card>
             <img src={imagem} alt={titulo} />
-            <Infos className="divFlex">
+            <Infos>
                 {categoria && <Tag size="small">{categoria}</Tag>}
                 {tipoCulinaria && <Tag size="small">{tipoCulinaria}</Tag>}
             </Infos>
         <CardText>
-            <InfoMain className="divFlex">
+            <InfoMain>
                 <h2>{titulo}</h2>
-                <div className="divFlex">
+                <Nota>
                     <span>{nota}</span>      
                     <Star src={star} alt="estrela" />
-                </div>
+                </Nota>
             </InfoMain>
             <p>{descricao}</p>
             <Button to={`/perfil`}>

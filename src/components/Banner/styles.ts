@@ -5,11 +5,6 @@ export const Imagem = styled.div`
     position: relative;
     background-size: cover;
     height: 280px;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 25px 170px;
-    font-size: 32px;
-    font-weight: 100;
 
     &::before{
         content: '';
@@ -19,10 +14,21 @@ export const Imagem = styled.div`
         inset:0;
     }
 
+    `
+    export const Div = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 24px;
+    padding-bottom: 32px;
+    font-weight: 100;
+    height: 100%;
+    
     p, h2{
         position: relative;
         z-index: 1;
         color: ${colors.white};
+        font-size: 32px;
     }
 
     h2{

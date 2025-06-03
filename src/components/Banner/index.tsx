@@ -1,14 +1,14 @@
 import bannerImg from '../../assets/italian.png'
-import { Imagem } from './styles'
+import { Div, Imagem } from './styles'
 
 
 const Banner = () => (
 
     <Imagem className='divFlex' style={{backgroundImage: `url(${bannerImg})` }}>
-
-        <p>Italiana</p>
-        <h2>La Dolce Vita Trattoria</h2>
-
+        <Div className="container">
+            <p>Italiana</p>
+            <h2>La Dolce Vita Trattoria</h2>
+        </Div> 
     </Imagem>
 
 

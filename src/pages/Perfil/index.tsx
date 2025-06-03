@@ -4,7 +4,7 @@ import Pratos from "../../models/Produto"
 import logo from '../../assets/logo.png'
 import pizza  from '../../assets/pizza.png'
 import Banner from "../../components/Banner"
-import { LinkIten } from "./style"
+import { Div, LinkIten } from "./style"
 
 const italiana: Pratos[] = [
     {
@@ -48,14 +48,16 @@ const italiana: Pratos[] = [
 const Perfil = () => (
 
     <>
-        <Header> 
-            <LinkIten to="/">Restaurantes</LinkIten>
-            <img src={logo} alt="Logo efood" />
-            <p>0 produto(s) no carrinho</p>
+        <Header > 
+            <Div className="container">
+                <LinkIten to="/">Restaurantes</LinkIten>
+                <img src={logo} alt="Logo efood" />
+                <p>0 produto(s) no carrinho</p>
+            </Div>
         </Header>
         <Banner/>
         <div className="container">
-            <ListaDeProdutos $background="orange_rose" itens={italiana} />
+            <ListaDeProdutos $estaNaHome={false}   $background="orange_rose" itens={italiana} />
         </div>  
     </>
 

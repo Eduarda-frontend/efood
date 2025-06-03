@@ -22,17 +22,10 @@ const EstiloGlobal = createGlobalStyle`
         }
         
         .container{
-            padding-top: 80px;
-            padding-bottom: 120px;
-            margin: 0 auto;
+            margin: auto;
             max-width: 1024px;
             width: 100%;
         }
-
-        .divFlex{
-            display: flex;
-        }
-
     }
 `
 

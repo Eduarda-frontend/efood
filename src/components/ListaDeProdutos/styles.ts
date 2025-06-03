@@ -1,4 +1,4 @@
-import styled from "styled-components"
+    import styled from "styled-components"
 import { colors } from "../../styles"
 import type { Props } from "."
 import { Card, Star } from "../Prato/styles"
@@ -7,6 +7,8 @@ import { ButtonLink } from "../Button/styles"
 export const ListCard = styled.ul<Omit<Props, 'itens'>>`
     display: grid;
     justify-items: center;
+    margin-top:${({ $estaNaHome }) => ($estaNaHome ? '80px' : '56px')};
+    margin-bottom: 120px;
     column-gap: 80px;
     row-gap: 48px;
     list-style: none;

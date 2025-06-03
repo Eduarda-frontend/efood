@@ -1,4 +1,4 @@
-class Prato {
+class   Prato {
     titulo: string
     descricao: string
     imagem: string

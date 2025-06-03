@@ -15,6 +15,7 @@ export const CardText = styled.div`
 `
 
 export const Infos = styled.div`
+    display: flex;
     position : absolute;
     top: 0;
     right: 0;
@@ -23,6 +24,7 @@ export const Infos = styled.div`
 `
 
 export const InfoMain = styled.div`
+    display: flex;
     font-weight: bold;
     font-size: 18px;
     justify-content: space-between;
@@ -31,11 +33,10 @@ export const InfoMain = styled.div`
         font-size: 18px;
         margin-top: 8px;
     }
-
-    div{
-        align-items: center;
-        gap: 8px;
-    }
+`
+export const Nota = styled.div`
+    display: flex;
+    gap: 8px;
 `
 
 export const Star = styled.img`

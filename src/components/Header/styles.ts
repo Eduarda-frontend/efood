@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../styles";
 
 export const HeaderBar = styled.header<{$estaNaHome: boolean}>`
+    display:flex;
     height: ${({ $estaNaHome }) => ($estaNaHome ? '384px' : '186px')};
     text-align: center;
     flex-direction: ${({ $estaNaHome }) => ($estaNaHome ? 'column' : 'row')};

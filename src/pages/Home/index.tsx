@@ -64,7 +64,7 @@ const Home = () => (
             <p>Viva experiências gastronômicas no conforto da sua casa</p>
         </Header>
         <div className="container">
-            <ListaDeProdutos $background="white" itens={produtos} />
+            <ListaDeProdutos $estaNaHome={true} $background="white" itens={produtos} />
         </div>  
     </>
 )
