@@ -1,15 +1,15 @@
     import styled from "styled-components"
 import { colors } from "../../styles"
-import type { Props } from "."
-import { Card, Star } from "../Prato/styles"
+import type { Props } from "./ListaRestaurantes"
+import { Card, Star } from "../Cards/styles"
 import { ButtonLink } from "../Button/styles"
 
 export const ListCard = styled.ul<Omit<Props, 'itens'>>`
     display: grid;
     justify-items: center;
-    margin-top:${({ $estaNaHome }) => ($estaNaHome ? '80px' : '56px')};
+    margin-top:${({ $estaNaHome }) => ($estaNaHome ? '5rem' : '2rem')};
     margin-bottom: 120px;
-    column-gap: 80px;
+    column-gap: ${({ $estaNaHome }) => ($estaNaHome ? '5rem' : '2rem')};
     row-gap: 48px;
     list-style: none;
     font-size : 14px;
@@ -35,8 +35,11 @@ export const ListCard = styled.ul<Omit<Props, 'itens'>>`
         }
     }
 
-    img{
+    .img{
         width:100%;
+        max-width: ${({ $estaNaHome }) => ($estaNaHome ? '29.5rem' : '19rem')};
+        height: ${({ $estaNaHome }) => ($estaNaHome ? '13.5rem' : '10.4rem')};
+        object-fit: cover;
     }
 
     @media (max-width: 680px){

@@ -5,13 +5,13 @@ export const Card = styled.li`
     position: relative;
     
     p{
-        margin: 16px 0;
+        margin: 1rem 0;
     }
 `
 export const CardText = styled.div`
     border: 1px solid ${colors.orange_rose};
     border-top: none;
-    padding: 0 8px;
+    padding: 0.5rem;
 `
 
 export const Infos = styled.div`
@@ -42,4 +42,10 @@ export const Nota = styled.div`
 export const Star = styled.img`
     width: 20px;
     height: 21px;
+`
+
+export const Capa = styled.img`
+    object-fit: cover;
+    width: 29rem;
+    height: 13.56rem;
 `
