@@ -14,7 +14,7 @@ const Perfil = () => {
                     <p>0 produto(s) no carrinho</p>
                 </Div>
             </Header>
-            <Banner titulo={""} tipo={""}/>
+            <Banner/>
             <div className="container">
                 <ListaCardapio $background={"orange_rose"} $estaNaHome={false}    />
             </div>

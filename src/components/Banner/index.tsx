@@ -1,18 +1,12 @@
 import bannerImg from '../../assets/italian.png'
 import { Div, Imagem } from './styles'
 
-export type Props = {
-    titulo: string
-    tipo: string
-}
-
-
-const Banner = ( { titulo, tipo }: Props ) => (
+const Banner = () => (
 
     <Imagem className='divFlex' style={{backgroundImage: `url(${bannerImg})` }}>
         <Div className="container">
-            <p>{tipo}</p>
-            <h2>{titulo}</h2>
+            <p>Italiana</p>
+            <h2>La Dolce Vita Trattoria</h2>
         </Div> 
     </Imagem>
 

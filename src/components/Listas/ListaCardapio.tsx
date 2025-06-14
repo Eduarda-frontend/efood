@@ -17,12 +17,6 @@ export type CardapioItem = {
     porcao: string
   }
 
-export const formataPreco = (preco = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-        style:'currency',
-        currency:'BRL'
-    }).format(preco)
-}
 
 const ListaCardapio = ( { $background, $estaNaHome } : Props) => {
     const { id } = useParams()
@@ -32,7 +26,6 @@ const ListaCardapio = ( { $background, $estaNaHome } : Props) => {
         fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
         .then((res) => res.json())
         .then((res) => {
-            console.log('Resposta API:', res)
             setProdutos(res.cardapio)
         })
     }, [id])
@@ -50,6 +43,8 @@ const ListaCardapio = ( { $background, $estaNaHome } : Props) => {
                 nome={prato.nome}
                 descricao={prato.descricao}
                 foto={prato.foto}
+                preco={prato.preco}
+                porcao={prato.porcao}
                 />
             ))}
         </ListCard>

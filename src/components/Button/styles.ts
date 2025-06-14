@@ -1,13 +1,26 @@
 import { Link } from "react-router-dom"
-import styled from "styled-components"
-import type { Props } from "../../Tag"
+import styled, { css } from "styled-components"
+import { colors } from "../../styles"
 
-export const ButtonLink = styled(Link)<Props>`
+const button = css`
     text-decoration: none;
-    font-size: ${(props) => (props.size === 'big' ? '16px' : '14px')};
+    font-size: 16px;
     font-weight: bold;
-    margin-bottom: 8px;
     padding: 4px 6px;
-    display: inline-block;
     text-align: center;
+    border: none;
+    cursor: pointer;
+`
+
+export const ButtonLink = styled(Link)`
+    ${button}
+    background-color: ${colors.orange_rose};
+    color: ${colors.white};
+    display: inline-block;
+`
+
+export const ButtonStyled = styled.button`
+    ${button}
+    background-color: ${colors.light_orange};
+    color: ${colors.orange_rose};
 `

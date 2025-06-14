@@ -42,14 +42,14 @@ const Restaurante = ({
             </Infos>
                 <CardText>
                     <InfoMain>
-                        <h2>{titulo}</h2>
+                        <h2 className="titulo">{titulo}</h2>
                         <Nota>
                             <span>{avaliacao}</span>      
                             <Star src={star} alt="estrela" />
                         </Nota>
                     </InfoMain>
                     <p>{getDescricao(descricao)}</p>
-                    <Button to={`/perfil/${id}`} size={"small"}>
+                    <Button to={`/perfil/${id}`}>
                         Saiba mais
                     </Button>
                 </CardText>

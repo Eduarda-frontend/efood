@@ -7,6 +7,10 @@ export const Card = styled.li`
     p{
         margin: 1rem 0;
     }
+
+    button{
+        width: 100%;
+    }
 `
 export const CardText = styled.div`
     border: 1px solid ${colors.orange_rose};
@@ -26,13 +30,7 @@ export const Infos = styled.div`
 export const InfoMain = styled.div`
     display: flex;
     font-weight: bold;
-    font-size: 18px;
     justify-content: space-between;
-    
-    h2{
-        font-size: 18px;
-        margin-top: 8px;
-    }
 `
 export const Nota = styled.div`
     display: flex;
@@ -48,4 +46,68 @@ export const Capa = styled.img`
     object-fit: cover;
     width: 29rem;
     height: 13.56rem;
+`
+
+export const Modal = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+
+    &.show{
+        display:flex;
+    }
+
+    .overlay{
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+`
+
+export const ModalContent = styled.div`
+    position: relative;
+    width: 1024px;
+    padding: 32px;
+    background-color:  ${colors.orange_rose};
+    color: ${colors.light_orange};
+    z-index: 1;
+
+    > div{
+        display: flex;
+    }
+
+    > img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 8px; 
+    }
+`
+export const TituloModal = styled.h2`
+    font-size: 18px;
+    margin-bottom: 16px;
+`
+
+export const DivTexto = styled.div`
+    line-height: 22px;
+
+    p{
+        margin-bottom: 16px;
+    }
+`
+
+export const ImgModal = styled.img`
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    margin-right: 24px;
 `
