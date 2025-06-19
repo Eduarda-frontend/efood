@@ -4,106 +4,62 @@ import { Card, CardText, DivTexto, ImgModal, InfoMain, Modal, ModalContent, Titu
 import { ButtonStyled } from "../Button/styles"
 
 import fechar from '../../assets/fechar.png'
+import { useDispatch } from "react-redux"
+import { adicionar } from "../../store/reducer/carrinho"
+import type { CardapioItem } from "../Listas/ListaCardapio"
 
-type Props = {
-    id: number
-    nome: string
-    descricao: string
-    foto: string 
-    porcao?: string
-    preco?: number
-}
-
-interface ModalProps extends Props {
-    estaVisivel: boolean
-}
+type CardapioProps = {
+    prato: CardapioItem
+  }
 
 export const formataPreco = (preco = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-        style:'currency',
-        currency:'BRL'
-    }).format(preco)
+    return new Intl.NumberFormat('pt-BR', { style:'currency',currency:'BRL'}).format(preco)
 }
 
-const Cardapio = ({
-    nome,
-    foto,
-    descricao,  
-    id,
-    preco,
-    porcao
-} : Props) => {
-    const getDescricao = (descricao: string) => {
-        if(descricao.length > 150) {
-            return descricao.slice(0 , 147) + '...'
-        }
-        return descricao
-    }
-    const [ modal, setModal] = useState<ModalProps>({
-        estaVisivel: false,
-        id: 0,
-        nome: '',
-        foto:'',
-        descricao:''
-    })
+const getDescricao = (descricao: string) => {
+    return descricao.length > 150 ? descricao.slice(0, 147) + '...' : descricao
+}
 
-    const fecharModal = () => {
-        setModal({
-            estaVisivel: false,
-            id: 0,
-            nome: '',
-            foto:'',
-            descricao:''
-        })
-    }
+const Cardapio = ({ prato } : CardapioProps) => {
+    const dispatch = useDispatch()
+    const [ modalVisivel, setModalVisivel] = useState(false)
+
+    const abrirMoodal = () => setModalVisivel(true)
+    const fecharModal = () => setModalVisivel(false)
+    const adicionarAoCarrinho = () => dispatch(adicionar(prato))
+    
 
     return( 
         <>
             <Card>
                 <CardText>
-                    <img className="img" src={foto} alt={nome} />
+                    <img className="img" src={prato.foto} alt={prato.nome} />
                     <InfoMain>
-                        <h2 className="titulo">{nome}</h2>
+                        <h2 className="titulo">{prato.nome}</h2>
                     </InfoMain>
-                    <p>{getDescricao(descricao)}</p>
-                    <ButtonStyled onClick={() => {setModal({
-                            estaVisivel: true,
-                            id:id,
-                            nome: nome,
-                            foto:foto,
-                            descricao:descricao
-                    })}}> Adicionar ao carrinho </ButtonStyled>
+                    <p>{getDescricao(prato.descricao)}</p>
+                    <ButtonStyled onClick={abrirMoodal}> Mais Detalhes </ButtonStyled>
                 </CardText>
             </Card>
-                <Modal className={modal.estaVisivel ? 'show' : ''}>
+                <Modal className={modalVisivel ? 'show' : ''}>
                     <ModalContent>
                         <img
                         src={fechar}
                         alt="Ícone de fechar"
-                        onClick={() => {
-                            fecharModal()
-                        }} />
+                        onClick={fecharModal} />
                         <div>
-                            <ImgModal src={foto} alt={nome} />
+                            <ImgModal src={prato.foto} alt={prato.nome} />
                             <div>
-                                <TituloModal>{nome}</TituloModal>
+                                <TituloModal>{prato.nome}</TituloModal>
                                 <DivTexto>                        
-                                    <p>{descricao} </p> 
-                                    <p>{porcao?.includes(' a ') ? `Serve: de  ${porcao}` : `Serve: ${porcao}` }</p>
+                                    <p>{prato.descricao} </p> 
+                                    <p>{prato.porcao?.includes(' a ') ? `Serve: de  ${prato.porcao}` : `Serve: ${prato.porcao}` }</p>
                                 </DivTexto>
-                                <ButtonStyled onClick={() => {setModal({
-                                        estaVisivel: true,
-                                        id:id,
-                                        nome: nome,
-                                        foto:foto,
-                                        descricao:descricao
-                                })}}> Adicionar ao carrinho {formataPreco(preco)} </ButtonStyled>
+                                <ButtonStyled onClick={adicionarAoCarrinho}> Adicionar ao carrinho {formataPreco(prato.preco)} </ButtonStyled>
                             </div>
                         </div>
                     </ModalContent>
-                    <div onClick={() => {
-                        fecharModal()
-                    }}
+                    <div onClick={fecharModal}
                     className="overlay">
                     </div>
                 </Modal>

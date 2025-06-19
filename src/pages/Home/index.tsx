@@ -1,4 +1,4 @@
-import ListaDeProdutos from "../../components/Listas/ListaRestaurantes"
+import ListaDeRestaurantes from "../../components/Listas/ListaRestaurantes"
 import logo from '../../assets/logo.png'
 import Header from "../../components/Header"
 import { useGetPratosQuery } from "../../services/api"
@@ -17,9 +17,7 @@ const Home = () => {
             <img src={logo} alt="Logo efood" />
             <p>Viva experiências gastronômicas no conforto da sua casa</p>
         </Header>
-        <div className="container">
-            <ListaDeProdutos $estaNaHome $background="white" itens={produtos} />
-        </div>  
+        <ListaDeRestaurantes $estaNaHome $background="white" itens={produtos} />
     </>
     )
 }

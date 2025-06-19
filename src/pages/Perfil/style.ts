@@ -12,3 +12,12 @@ export const Div = styled.div`
     align-items: center;
     justify-content: space-between;
 `
+export const BotaoCarrinho = styled.button`
+    display: flex;
+    background-color: transparent;
+    border: none;
+    color:${colors.orange_rose};
+    font-weight: 900;
+    font-size: 18px;
+    cursor: pointer;
+`

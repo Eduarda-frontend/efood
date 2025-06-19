@@ -3,38 +3,23 @@ import { Card, CardText, Star, InfoMain, Infos, Nota } from "./styles"
 
 import star from '../../assets/star.png'
 import Button from "../Button"
+import type { RestauranteItem } from "../Listas/ListaRestaurantes"
 
-type Props = {
-    id: number
-    titulo: string
-    destacado: boolean
-    tipo: string
-    avaliacao: number
-    descricao: string
+type RestauranteItemProps = {
+    restaurante: RestauranteItem
     infos: string[]
-    capa: string 
 }
 
-const Restaurante = ({
-    avaliacao,
-    capa,
-    descricao,
-    infos,
-    id,
-    titulo
-} : Props) => {
+const Restaurante = ({ restaurante, infos } : RestauranteItemProps) => {
 
     const getDescricao = (descricao: string) => {
-        if(descricao.length > 250) {
-            return descricao.slice(0 , 247) + '...'
-        }
-        return descricao
+        return descricao.length > 250 ? descricao.slice(0 , 247) + '...' : descricao 
     }
 
     return(
         
         <Card>
-            <img className="img"  src={capa} alt={titulo} />
+            <img className="img"  src={restaurante.capa} alt={restaurante.titulo} />
             <Infos>
                 {infos.map((info) => (
                     <Tag size="small" key={info}>{info}</Tag>
@@ -42,16 +27,14 @@ const Restaurante = ({
             </Infos>
                 <CardText>
                     <InfoMain>
-                        <h2 className="titulo">{titulo}</h2>
+                        <h2 className="titulo">{restaurante.titulo}</h2>
                         <Nota>
-                            <span>{avaliacao}</span>      
+                            <span>{restaurante.avaliacao}</span>      
                             <Star src={star} alt="estrela" />
                         </Nota>
                     </InfoMain>
-                    <p>{getDescricao(descricao)}</p>
-                    <Button to={`/perfil/${id}`}>
-                        Saiba mais
-                    </Button>
+                    <p>{getDescricao(restaurante.descricao)}</p>
+                    <Button to={`/perfil/${restaurante.id}`}> Saiba mais </Button>
                 </CardText>
         </Card>
     )

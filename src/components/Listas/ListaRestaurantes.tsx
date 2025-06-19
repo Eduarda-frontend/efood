@@ -3,12 +3,12 @@ import type { CardapioItem } from './ListaCardapio'
 import { ListCard } from './styles'
 
 export type Props = {
-    itens: Restaurante[]
+    itens: RestauranteItem[]
     $background: 'white' | 'orange_rose'
     $estaNaHome: boolean
 }
 
-export type Restaurante = {
+export type RestauranteItem = {
     id: number
     titulo: string
     destacado?: boolean
@@ -19,8 +19,8 @@ export type Restaurante = {
     cardapio: CardapioItem[]
 }
 
-const ListaDeProdutos = ( {itens, $background, $estaNaHome } : Props) => {
-    const getPratoTags = (prato:Restaurante) => {
+const ListaDeRestaurantes = ( {itens, $background, $estaNaHome } : Props) => {
+    const getPratoTags = (prato:RestauranteItem) => {
         const tags = []
 
         if(prato.tipo) {
@@ -34,22 +34,16 @@ const ListaDeProdutos = ( {itens, $background, $estaNaHome } : Props) => {
     }
 
     return (
-        <ListCard $estaNaHome={$estaNaHome} $background={$background}>
-        {itens.map((produto) => (
-            <Restaurante 
-                key={produto.id}
-                id={produto.id}
-                capa={produto.capa}
-                infos={getPratoTags(produto)}
-                titulo={produto.titulo}
-                avaliacao={produto.avaliacao ?? null}
-                tipo={produto.tipo ?? ''}
-                destacado={produto.destacado ?? false}
-                descricao={produto.descricao} 
-            />
-        ))}
-        </ListCard>
+        <div className="container">
+            <ListCard $estaNaHome={$estaNaHome} $background={$background}>
+            {itens.map((restaurante) => (
+                <li key={restaurante.id}>
+                    <Restaurante restaurante={restaurante} infos={getPratoTags(restaurante)} />
+                </li>
+            ))}
+            </ListCard>
+        </div>
     )
 }
 
-export default ListaDeProdutos
+export default ListaDeRestaurantes
