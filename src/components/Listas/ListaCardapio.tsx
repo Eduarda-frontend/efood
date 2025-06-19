@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom'
+
 import Cardapio from '../Cards/Cardapio'
 import { ListCard } from './styles'
-import { useEffect, useState } from 'react'
+import { useGetCardapioQuery } from '../../services/api'
+import Banner from '../Banner'
 
 export type Props = {
     $background: 'white' | 'orange_rose'
@@ -20,34 +22,31 @@ export type CardapioItem = {
 
 const ListaCardapio = ( { $background, $estaNaHome } : Props) => {
     const { id } = useParams()
-    const [produtos, setProdutos ] = useState<CardapioItem[]>([])
-
-    useEffect(() => {
-        fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
-        .then((res) => res.json())
-        .then((res) => {
-            setProdutos(res.cardapio)
-        })
-    }, [id])
+    const { data: produtos} = useGetCardapioQuery(id!)
     
     if(!produtos){
         return <h3>Carregando...</h3>
     }
 
     return (
-        <ListCard $estaNaHome={$estaNaHome} $background={$background}>
-            {produtos.map((prato) => (
-                <Cardapio 
-                key={prato.id}
-                id={prato.id}
-                nome={prato.nome}
-                descricao={prato.descricao}
-                foto={prato.foto}
-                preco={prato.preco}
-                porcao={prato.porcao}
-                />
-            ))}
-        </ListCard>
+        <>
+        <Banner tipo={produtos.tipo} titulo={produtos.titulo} />
+        <div className="container">
+            <ListCard $estaNaHome={$estaNaHome} $background={$background}>
+                {produtos.cardapio.map((prato) => (
+                    <Cardapio 
+                    key={prato.id}
+                    id={prato.id}
+                    nome={prato.nome}
+                    descricao={prato.descricao}
+                    foto={prato.foto}
+                    preco={prato.preco}
+                    porcao={prato.porcao}
+                    />
+                ))}
+            </ListCard>
+        </div>
+        </>
     )
 }
 

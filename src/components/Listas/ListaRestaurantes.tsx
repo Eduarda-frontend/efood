@@ -3,12 +3,12 @@ import type { CardapioItem } from './ListaCardapio'
 import { ListCard } from './styles'
 
 export type Props = {
-    itens: Prato[]
+    itens: Restaurante[]
     $background: 'white' | 'orange_rose'
     $estaNaHome: boolean
 }
 
-export type Prato = {
+export type Restaurante = {
     id: number
     titulo: string
     destacado?: boolean
@@ -20,7 +20,7 @@ export type Prato = {
 }
 
 const ListaDeProdutos = ( {itens, $background, $estaNaHome } : Props) => {
-    const getPratoTags = (prato:Prato) => {
+    const getPratoTags = (prato:Restaurante) => {
         const tags = []
 
         if(prato.tipo) {

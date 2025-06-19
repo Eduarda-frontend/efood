@@ -1,6 +1,7 @@
+import { useLocation } from 'react-router-dom'
+
 import { HeaderBar } from './styles'
 import vetorimg from '../../assets/vector.png'
-import { useLocation } from 'react-router-dom'
 
 export type Props = {
     children: React.ReactNode

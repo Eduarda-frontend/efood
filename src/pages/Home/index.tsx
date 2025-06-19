@@ -1,17 +1,15 @@
-import ListaDeProdutos, { type Prato } from "../../components/Listas/ListaRestaurantes"
+import ListaDeProdutos from "../../components/Listas/ListaRestaurantes"
 import logo from '../../assets/logo.png'
 import Header from "../../components/Header"
-import { useEffect, useState } from "react"
+import { useGetPratosQuery } from "../../services/api"
 
 
 const Home = () => {
-    const [produtos, setProdutos ] = useState<Prato[]>([])
+    const { data: produtos } = useGetPratosQuery()
 
-    useEffect(() => {
-        fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-        .then((res) => res.json())
-        .then((res) =>setProdutos(res))
-    }, [])
+    if(!produtos){
+       return <h4>Carregando...</h4>
+    }
 
     return (
         <>
