@@ -1,15 +1,15 @@
     import styled from "styled-components"
 import { colors } from "../../styles"
-import type { Props } from "./ListaRestaurantes"
+import type { Props } from "./ListRestaurant"
 import { Card, Star } from "../Cards/styles"
 
-export const ListCard = styled.ul<Omit<Props, 'itens'>>`
+export const ListCard = styled.ul<Omit<Props, 'items'>>`
     display: grid;
     justify-items: center;
-    margin-top:${({ $estaNaHome }) => ($estaNaHome ? '5rem' : '2rem')};
+    margin-top:${({ $itsHome }) => ($itsHome ? '5rem' : '2rem')};
     margin-bottom: 120px;
-    gap: ${({ $estaNaHome }) => ($estaNaHome ? '5rem' : '2rem')};
-    row-gap: ${({ $estaNaHome }) => ($estaNaHome ? '3rem' : '2rem')};
+    gap: ${({ $itsHome }) => ($itsHome ? '5rem' : '2rem')};
+    row-gap: ${({ $itsHome }) => ($itsHome ? '3rem' : '2rem')};
     list-style: none;
     font-size : 14px;
     grid-template-columns: ${(props) => props.$background === 'white' ? '1fr 1fr' : '1fr 1fr 1fr'};
@@ -25,8 +25,8 @@ export const ListCard = styled.ul<Omit<Props, 'itens'>>`
 
     .img{
         width:100%;
-        max-width: ${({ $estaNaHome }) => ($estaNaHome ? '29.5rem' : '19rem')};
-        height: ${({ $estaNaHome }) => ($estaNaHome ? '13.5rem' : '10.4rem')};
+        max-width: ${({ $itsHome }) => ($itsHome ? '29.5rem' : '19rem')};
+        height: ${({ $itsHome }) => ($itsHome ? '13.5rem' : '10.4rem')};
         object-fit: cover;
     }
 
@@ -35,8 +35,8 @@ export const ListCard = styled.ul<Omit<Props, 'itens'>>`
 
     }
 
-    .titulo{
-        font-size:  ${({ $estaNaHome }) => ($estaNaHome ? '18px' : '16px')}; 
+    .title{
+        font-size:  ${({ $itsHome }) => ($itsHome ? '18px' : '16px')}; 
         margin-top: 8px;    
     }
 `

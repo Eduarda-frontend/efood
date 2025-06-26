@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../styles";
 
-export const Imagem = styled.div`
+export const Image = styled.div`
     position: relative;
     background-size: cover;
     height: 280px;

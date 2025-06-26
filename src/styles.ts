@@ -26,6 +26,7 @@ const EstiloGlobal = createGlobalStyle`
             max-width: 1024px;
             width: 100%;
         }
+            
     }
 `
 

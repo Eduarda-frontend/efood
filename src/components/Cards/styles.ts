@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../styles";
 
-export const Card = styled.li`
+export const Card = styled.div`
     position: relative;
     
     p{
@@ -92,12 +92,12 @@ export const ModalContent = styled.div`
         padding: 8px; 
     }
 `
-export const TituloModal = styled.h2`
+export const TitleModal = styled.h2`
     font-size: 18px;
     margin-bottom: 16px;
 `
 
-export const DivTexto = styled.div`
+export const DivText = styled.div`
     line-height: 22px;
 
     p{

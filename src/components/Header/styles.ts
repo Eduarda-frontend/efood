@@ -1,18 +1,18 @@
 import styled from "styled-components";
 import { colors } from "../../styles";
 
-export const HeaderBar = styled.header<{$estaNaHome: boolean}>`
+export const HeaderBar = styled.header<{$itsHome: boolean}>`
     display:flex;
-    height: ${({ $estaNaHome }) => ($estaNaHome ? '384px' : '186px')};
+    height: ${({ $itsHome }) => ($itsHome ? '384px' : '186px')};
     text-align: center;
-    flex-direction: ${({ $estaNaHome }) => ($estaNaHome ? 'column' : 'row')};
+    flex-direction: ${({ $itsHome }) => ($itsHome ? 'column' : 'row')};
     justify-content: space-around;
     align-items: center;
-    font-size:${({ $estaNaHome }) => ($estaNaHome ? '36px' : '18px;')};
+    font-size:${({ $itsHome }) => ($itsHome ? '36px' : '18px;')};
     font-weight: 900;
     color: ${colors.orange_rose};
 
     p{
-        width:${({ $estaNaHome }) => ($estaNaHome ? '544px' : 'auto')};
+        width:${({ $itsHome }) => ($itsHome ? '544px' : 'auto')};
     }
 `

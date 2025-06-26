@@ -1,24 +1,23 @@
-import ListaDeRestaurantes from "../../components/Listas/ListaRestaurantes"
+import ListRestaurant from "../../components/List/ListRestaurant"
 import logo from '../../assets/logo.png'
 import Header from "../../components/Header"
-import { useGetPratosQuery } from "../../services/api"
-
+import { useGetPlateQuery } from "../../services/api"
 
 const Home = () => {
-    const { data: produtos } = useGetPratosQuery()
+    const { data: products } = useGetPlateQuery()
 
-    if(!produtos){
+    if(!products){
        return <h4>Carregando...</h4>
     }
 
     return (
         <>
-        <Header>
-            <img src={logo} alt="Logo efood" />
-            <p>Viva experiências gastronômicas no conforto da sua casa</p>
-        </Header>
-        <ListaDeRestaurantes $estaNaHome $background="white" itens={produtos} />
-    </>
+            <Header>
+                <img src={logo} alt="Logo efood" />
+                <p>Viva experiências gastronômicas no conforto da sua casa</p>
+            </Header>
+            <ListRestaurant $itsHome $background="white" items={products} />
+        </>
     )
 }
 

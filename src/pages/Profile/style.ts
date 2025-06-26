@@ -12,7 +12,7 @@ export const Div = styled.div`
     align-items: center;
     justify-content: space-between;
 `
-export const BotaoCarrinho = styled.button`
+export const ButtonCart = styled.button`
     display: flex;
     background-color: transparent;
     border: none;
