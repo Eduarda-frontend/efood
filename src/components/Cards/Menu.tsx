@@ -24,6 +24,7 @@ const Menu = ({ plate } : MenuProps) => {
 
     const openModal = () => setModalIsVisible(true)
     const closeModal = () => setModalIsVisible(false)
+    
     const addCart = () => {
         dispatch(add(plate))
         closeModal()
@@ -38,31 +39,31 @@ const Menu = ({ plate } : MenuProps) => {
                         <h2 className="title">{plate.nome}</h2>
                     </S.InfoMain>
                     <p>{getDescription(plate.descricao)}</p>
-                    <ButtonStyled onClick={openModal}> Mais Detalhes </ButtonStyled>
+                    <ButtonStyled title="Clique para ver mais detalhes" onClick={openModal}> Mais Detalhes </ButtonStyled>
                 </S.CardText>
             </S.Card>
-                <S.Modal className={modalIsVisible ? 'show' : ''}>
-                    <S.ModalContent>
-                        <img
-                        src={close}
-                        alt="Ícone de fechar"
-                        onClick={closeModal} />
+            <S.Modal className={modalIsVisible ? 'show' : ''}>
+                <S.ModalContent>
+                    <img
+                    src={close}
+                    alt="Ícone de fechar"
+                    onClick={closeModal} />
+                    <div>
+                        <S.ImgModal src={plate.foto} alt={plate.nome} />
                         <div>
-                            <S.ImgModal src={plate.foto} alt={plate.nome} />
-                            <div>
-                                <S.TitleModal>{plate.nome}</S.TitleModal>
-                                <S.DivText>                        
-                                    <p>{plate.descricao} </p> 
-                                    <p>{plate.porcao?.includes(' a ') ? `Serve: de  ${plate.porcao}` : `Serve: ${plate.porcao}` }</p>
-                                </S.DivText>
-                                <ButtonStyled onClick={addCart}> Adicionar ao carrinho {formatPrice(plate.preco)} </ButtonStyled>
-                            </div>
+                            <S.TitleModal>{plate.nome}</S.TitleModal>
+                            <S.DivText>                        
+                                <p>{plate.descricao} </p> 
+                                <p>{plate.porcao?.includes(' a ') ? `Serve: de  ${plate.porcao}` : `Serve: ${plate.porcao}` }</p>
+                            </S.DivText>
+                            <ButtonStyled title="Clique aqui para adicionar ao carrinho" onClick={addCart}> Adicionar ao carrinho {formatPrice(plate.preco)} </ButtonStyled>
                         </div>
-                    </S.ModalContent>
-                    <div onClick={closeModal}
-                    className="overlay">
                     </div>
-                </S.Modal>
+                </S.ModalContent>
+                <div onClick={closeModal}
+                className="overlay">
+                </div>
+            </S.Modal>
         </>
     )
 }

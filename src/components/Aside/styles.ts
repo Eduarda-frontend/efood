@@ -42,6 +42,19 @@ export const AsideContainer = styled.div`
         margin: 8px 0;
     }
 
+    form{
+         > p{
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+    }
+
+    ${ButtonStyled}{
+        margin-bottom: 8px;
+        width: 100%;
+        display: block;
+ }
+
 `
 export const InputGroup = styled.div`
     display: block;
@@ -73,11 +86,5 @@ export const Div = styled.aside`
 export const ContainerButton = styled.div`
     
     margin-top: 24px};
-    
-    ${ButtonStyled}{
-        margin-bottom: 8px;
-        width: 100%;
-        display: block;
-    }
     
 `

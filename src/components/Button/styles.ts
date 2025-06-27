@@ -4,7 +4,7 @@ import { colors } from "../../styles"
 
 const button = css`
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     padding: 4px 6px;
     text-align: center;

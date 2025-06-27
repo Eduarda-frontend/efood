@@ -32,9 +32,7 @@ const ListMenu = ( { $background, $itsHome } : Props) => {
             <div className="container">
                 <ListCard $itsHome={$itsHome} $background={$background}>
                      {products.cardapio.map((plate) => (
-                        <li key={plate.id}>
-                            <Menu plate={plate} />
-                        </li>
+                        <Menu key={plate.id} plate={plate} />
                     ))} 
                 </ListCard>
             </div>

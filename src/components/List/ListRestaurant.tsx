@@ -37,9 +37,7 @@ const ListRestaurant = ( {items, $background, $itsHome } : Props) => {
         <div className="container">
             <ListCard $itsHome={$itsHome} $background={$background}>
             {items.map((restaurant) => (
-                <li key={restaurant.id}>
-                    <Restaurant restaurant={restaurant} infos={getPlateTags(restaurant)} />
-                </li>
+                <Restaurant key={restaurant.id} restaurant={restaurant} infos={getPlateTags(restaurant)} />
             ))}
             </ListCard>
         </div>

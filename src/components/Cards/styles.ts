@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../styles";
 
-export const Card = styled.div`
+export const Card = styled.li`
     position: relative;
     
     p{
@@ -35,6 +35,9 @@ export const InfoMain = styled.div`
 export const Nota = styled.div`
     display: flex;
     gap: 8px;
+    font-size: 18px;
+    align-items: flex-end;
+
 `
 
 export const Star = styled.img`

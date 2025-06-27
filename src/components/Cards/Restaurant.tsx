@@ -26,17 +26,17 @@ const Restaurant = ({ restaurant, infos } : RestaurantItemProps) => {
                     <Tag size="small" key={info}>{info}</Tag>
                 ))}
             </S.Infos>
-                <S.CardText>
-                    <S.InfoMain>
-                        <h2 className="title">{restaurant.titulo}</h2>
-                        <S.Nota>
-                            <span>{restaurant.avaliacao}</span>      
-                            <S.Star src={star} alt="estrela" />
-                        </S.Nota>
-                    </S.InfoMain>
-                    <p>{getDescription(restaurant.descricao)}</p>
-                    <ButtonLink to={`/perfil/${restaurant.id}`}> Saiba mais </ButtonLink>
-                </S.CardText>
+            <S.CardText>
+                <S.InfoMain>
+                    <h2 className="title">{restaurant.titulo}</h2>
+                    <S.Nota>
+                        <span>{restaurant.avaliacao}</span>      
+                        <S.Star src={star} alt="estrela" />
+                    </S.Nota>
+                </S.InfoMain>
+                <p>{getDescription(restaurant.descricao)}</p>
+                <ButtonLink title='Ver o menu completo' to={`/perfil/${restaurant.id}`}> Saiba mais </ButtonLink>
+            </S.CardText>
         </S.Card>
     )
 }

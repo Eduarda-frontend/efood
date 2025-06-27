@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { IMaskInput } from "react-imask";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -8,8 +10,8 @@ import type { RootReducer } from "../../store";
 import { usePurchaseMutation } from "../../services/api";
 
 import { ButtonStyled } from "../Button/styles";
+import { DivRow, PedidoFinalizado } from "./styles";
 import { ContainerButton } from "../Aside/styles";
-import { DivRow } from "./styles";
 
 type Props = {
 	price: string;
@@ -18,15 +20,10 @@ type Props = {
 
 const FormCard = ({ price, stageCart }: Props) => {
     const dispatch = useDispatch()
+	const navigate = useNavigate()
 	const [stage, setStage] = useState<"delivery" | "payment">("delivery");
-
 	const { items } = useSelector((state: RootReducer) => state.cart);
 	const [purchase, { data, isSuccess }] = usePurchaseMutation();
-
-     const closeCart = () => {
-        dispatch(close())
-        dispatch(clear())
-     }
 
 	const form = useFormik({
 		initialValues: {
@@ -44,7 +41,7 @@ const FormCard = ({ price, stageCart }: Props) => {
 			expiresYear: "",
 		},
 		validateOnMount: true,
-		validationSchema: Yup.object({
+		validationSchema: Yup.object().shape({
 			fullName: Yup.string()
 				.min(5, "O nome precisa ter pelo menos 5 caracteres")
 				.required("* O campo é obrigatório"),
@@ -102,6 +99,13 @@ const FormCard = ({ price, stageCart }: Props) => {
 		return hasError;
 	};
 
+	const closeCart = () => {
+		dispatch(clear())
+		dispatch(close())
+		stageCart()
+		navigate('/')
+	}
+
 	return (
 		<>
 			{stage === "delivery" && (
@@ -152,13 +156,15 @@ const FormCard = ({ price, stageCart }: Props) => {
 
 						<div>
 							<label htmlFor="cep">CEP</label>
-							<input
+							<IMaskInput
 								type="text"
 								id="cep"
 								name="cep"
 								value={form.values.cep}
 								onChange={form.handleChange}
 								onBlur={form.handleBlur}
+								mask="00000-000"
+
 							/>
 							{checkInputHasError("cep") && (
 								<p>{form.errors.cep}</p>
@@ -189,22 +195,34 @@ const FormCard = ({ price, stageCart }: Props) => {
 						onBlur={form.handleBlur}
 					/>
 
-					<ContainerButton>
-						<ButtonStyled type="button" onClick={() => setStage("payment")}> Continuar com o pagamento</ButtonStyled>
-						<ButtonStyled type="button" onClick={stageCart}>Voltar para o carrinho</ButtonStyled>
-					</ContainerButton>
+						<ContainerButton>
+							<ButtonStyled title="Clique aqui para continuar com o pagamento" type="button"  onClick={() => {
+								if (form.dirty) {
+									setStage("payment");
+								} else {
+								    form.setTouched({
+										fullName: true,
+										address: true,
+										city: true,
+										cep: true,
+										number: true,
+									  });
+								}
+							}}> Continuar com o pagamento</ButtonStyled>
+							<ButtonStyled title="Clique aqui pra voltar ao carrinho" type="button" onClick={stageCart}>Voltar para o carrinho</ButtonStyled>
+						</ContainerButton>
 				</form>
 			)}
 			{stage === "payment" && (
 				<>
 					{isSuccess && data ? (
-						<>
+						<PedidoFinalizado>
 							<h3>Pedido realizado - {data.orderId}</h3>
 
 							<p>
 								Estamos felizes em informar que seu pedido já
 								está em processo de preparação e, em breve, será
-								entregue no endereço fornecido.
+								entregue no endereço fornecido. 
 							</p>
 							<p>
 								Gostaríamos de ressaltar que nossos entregadores
@@ -221,8 +239,8 @@ const FormCard = ({ price, stageCart }: Props) => {
 								agradável experiência gastronômica. Bom apetite!
 							</p>
 
-                            <ButtonStyled type="button" onClick={closeCart}>Concluir</ButtonStyled>
-						</>
+                            <ButtonStyled title="Clique aqui para voltar a lista de restaurantes" type="button" onClick={closeCart}>Concluir</ButtonStyled>
+						</PedidoFinalizado>
 					) : (
 						<form onSubmit={form.handleSubmit}>
 							<h3>Pagamento - Valor a pagar <span>{price}</span> </h3>
@@ -245,64 +263,61 @@ const FormCard = ({ price, stageCart }: Props) => {
 									<label htmlFor="cardNumber">
 										Número do cartão
 									</label>
-									<input
+									<IMaskInput
 										type="text"
 										id="cardNumber"
 										name="cardNumber"
-										value={form.values.cardNumber}
+										value={String(form.values.cardNumber)} 
 										onChange={form.handleChange}
 										onBlur={form.handleBlur}
+										mask="0000 0000 0000 0000"
+
 									/>
-									{checkInputHasError("cardNumber") && (
-										<p>{form.errors.cardNumber}</p>
-									)}
+									{checkInputHasError("cardNumber") && (<p>{form.errors.cardNumber}</p>)}
 								</div>
 
 								<div>
 									<label htmlFor="cardCode">CVV</label>
-									<input
-										type="number"
+									<IMaskInput
+										type="text"
 										id="cardCode"
 										name="cardCode"
 										value={form.values.cardCode}
 										onChange={form.handleChange}
 										onBlur={form.handleBlur}
-									/>
-									{checkInputHasError("cardCode") && (
-										<p>{form.errors.cardCode}</p>
-									)}
+										mask="000"
+										/>
+									{checkInputHasError("cardCode") && (<p>{form.errors.cardCode}</p>)}
 								</div>
 							</DivRow>
 
 							<DivRow>
 								<div>
 									<label htmlFor="expiresMonth">Mês de vencimento</label>
-									<input
+									<IMaskInput
 										type="text"
 										id="expiresMonth"
 										name="expiresMonth"
 										value={form.values.expiresMonth}
 										onChange={form.handleChange}
 										onBlur={form.handleBlur}
+										mask="00"
 									/>
-									{checkInputHasError("expiresMonth") && (
-										<p>{form.errors.expiresMonth}</p>
-									)}
+									{checkInputHasError("expiresMonth") && (<p>{form.errors.expiresMonth}</p>)}
 								</div>
 
 								<div>
 									<label htmlFor="expiresYear">Ano de vencimento</label>
-									<input
-										type="number"
+									<IMaskInput
+										type="text"
 										id="expiresYear"
 										name="expiresYear"
 										value={form.values.expiresYear}
 										onChange={form.handleChange}
 										onBlur={form.handleBlur}
+										mask="0000"
 									/>
-									{checkInputHasError("expiresYear") && (
-										<p>{form.errors.expiresYear}</p>
-									)}
+									{checkInputHasError("expiresYear") && (<p>{form.errors.expiresYear}</p>)}
 								</div>
 							</DivRow>
 							<ContainerButton>
