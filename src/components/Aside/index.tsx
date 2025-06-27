@@ -12,7 +12,7 @@ import * as S from "./styles"
 
 const Aside = ( ) => {
     const dispatch = useDispatch();
-    const { items, isOpen} = useSelector((state: RootReducer) => state.cart)
+    const { items, isOpen } = useSelector((state: RootReducer) => state.cart)
     const [ stage, setStage ] = useState<'cart' | 'checkout'>('cart')
 
     const closeCart = () => dispatch(close())

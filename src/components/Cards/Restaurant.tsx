@@ -6,18 +6,23 @@ import star from '../../assets/star.png'
 import ButtonLink from "../Button"
 
 import type { RestaurantItem } from "../List/ListRestaurant"
+import Loader from "../Loader/Index"
 
 type RestaurantItemProps = {
     restaurant: RestaurantItem
     infos: string[]
+    isLoading: boolean
 }
 
-const Restaurant = ({ restaurant, infos } : RestaurantItemProps) => {
-
+const Restaurant = ({ restaurant, infos, isLoading } : RestaurantItemProps) => {
+    
     const getDescription = (description: string) => {
         return description.length > 250 ? description.slice(0 , 247) + '...' : description 
     }
-
+    
+    if (isLoading) {
+        return <Loader />
+      }
     return(  
         <S.Card>
             <img className="img"  src={restaurant.capa} alt={restaurant.titulo} />

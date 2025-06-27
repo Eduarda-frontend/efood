@@ -9,16 +9,18 @@ import close from '../../assets/close.png'
 
 import * as S from "./styles"
 import { ButtonStyled } from "../Button/styles"
+import Loader from "../Loader/Index"
 
 type MenuProps = {
     plate: MenuItem
+    isLoading: boolean
   }
 
 const getDescription = (description: string) => {
     return description.length > 150 ? description.slice(0, 147) + '...' : description
 }
 
-const Menu = ({ plate } : MenuProps) => {
+const Menu = ({ plate, isLoading } : MenuProps) => {
     const dispatch = useDispatch()
     const [ modalIsVisible, setModalIsVisible] = useState(false)
 
@@ -29,6 +31,11 @@ const Menu = ({ plate } : MenuProps) => {
         dispatch(add(plate))
         closeModal()
     }
+
+    
+  if (isLoading) {
+    return <Loader />
+  }
 
     return( 
         <>

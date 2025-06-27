@@ -5,6 +5,7 @@ import { useGetMenuQuery } from '../../services/api'
 import Banner from '../Banner'
 
 import { ListCard } from './styles'
+import Loader from '../Loader/Index'
 
 export type Props = {
     $background: 'white' | 'orange_rose'
@@ -22,9 +23,9 @@ export type MenuItem = {
 
 const ListMenu = ( { $background, $itsHome } : Props) => {
     const { id } = useParams()
-    const { data: products} = useGetMenuQuery(id!)
+    const { data: products, isLoading} = useGetMenuQuery(id!)
     
-    if(!products) return <h3>Carregando...</h3>
+    if(!products) return <Loader/>
     
     return (
         <>
@@ -32,7 +33,7 @@ const ListMenu = ( { $background, $itsHome } : Props) => {
             <div className="container">
                 <ListCard $itsHome={$itsHome} $background={$background}>
                      {products.cardapio.map((plate) => (
-                        <Menu key={plate.id} plate={plate} />
+                        <Menu isLoading={isLoading} key={plate.id} plate={plate} />
                     ))} 
                 </ListCard>
             </div>
