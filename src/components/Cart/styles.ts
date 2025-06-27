@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../styles"
 
-import excluir from '../assets/lixeira.png'
+import excluir from '../../assets/lixeira.png'
 
 export const DivTotalValue = styled.div`
     color: ${colors.light_orange};
