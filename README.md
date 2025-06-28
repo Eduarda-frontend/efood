@@ -34,16 +34,17 @@ Aplicação web para exibição de cardápios e simulação de pedidos em restau
 ## 📸 Capturas de Tela
 
 ### 🏠 Página Inicial
-![Página inicial](link-ou-caminho-da-imagem)
+[Página inicial] ![Captura de tela 2025-06-28 084358](https://github.com/user-attachments/assets/cfa1104b-1554-4886-9ae0-7bd2ea5dc599)
 
 ### 🍽️ Página de Cardápio
-![Página do cardápio](link-ou-caminho-da-imagem)
+[Página do cardápio] ![Captura de tela 2025-06-28 084421](https://github.com/user-attachments/assets/e764281b-51c1-42b7-8f4b-616b7ea44829)
 
 ### 🛒  Carrinho
-![Carrinho](link-ou-caminho-da-imagem)
+[Carrinho] ![Captura de tela 2025-06-28 084442](https://github.com/user-attachments/assets/9baa2842-6e55-449d-aa39-5f5188d4a2bf)
+
 
 ### 🪟 Modal
-![Modal](link-ou-caminho-da-imagem)
+[Modal] ![Captura de tela 2025-06-28 084432](https://github.com/user-attachments/assets/5c8b3e63-a419-4d20-8a2c-027b43f319f1)
 
 ---
 
