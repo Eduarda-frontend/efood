@@ -46,6 +46,9 @@ Aplicação web para exibição de cardápios e simulação de pedidos em restau
 ### 🪟 Modal
 [Modal] ![Captura de tela 2025-06-28 084432](https://github.com/user-attachments/assets/5c8b3e63-a419-4d20-8a2c-027b43f319f1)
 
+Você pode visualizar a versão online do projeto acessando o seguinte link:  
+👉 [Acesse o projeto na Vercel]([https://doceechocolate.vercel.app/](https://efood-topaz-five.vercel.app/)
+
 ---
 
 ## ✅ Tecnologias Utilizadas
