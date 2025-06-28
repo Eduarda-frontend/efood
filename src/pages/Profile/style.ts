@@ -15,6 +15,7 @@ export const Div = styled.div`
 export const ButtonCart = styled.button`
     display: flex;
     background-color: transparent;
+    font-family: Roboto, sans-serif;
     border: none;
     color:${colors.orange_rose};
     font-weight: 900;

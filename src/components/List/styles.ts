@@ -1,5 +1,5 @@
     import styled from "styled-components"
-import { colors } from "../../styles"
+import { breackpoints, colors } from "../../styles"
 import type { Props } from "./ListRestaurant"
 import { Card, Star } from "../Cards/styles"
 
@@ -30,8 +30,12 @@ export const ListCard = styled.ul<Omit<Props, 'items'>>`
         object-fit: cover;
     }
 
-    @media (max-width: 680px){
+    @media (max-width: ${breackpoints.tablet}){
         grid-template-columns: 1fr;
+
+        .img{
+            max-width: 100%;
+        }
 
     }
 

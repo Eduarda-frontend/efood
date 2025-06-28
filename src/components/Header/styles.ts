@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../styles";
+import { breackpoints, colors } from "../../styles";
 
 export const HeaderBar = styled.header<{$itsHome: boolean}>`
     display:flex;
@@ -14,5 +14,13 @@ export const HeaderBar = styled.header<{$itsHome: boolean}>`
 
     p{
         width:${({ $itsHome }) => ($itsHome ? '544px' : 'auto')};
+    }
+
+    @media (max-width: ${breackpoints.tablet}){
+        font-size: 16px;
+
+        button{
+            font-size: 16px;  
+        }
     }
 `

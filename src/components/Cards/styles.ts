@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../styles";
+import { breackpoints, colors } from "../../styles";
 
 export const Card = styled.li`
     position: relative;
@@ -74,6 +74,7 @@ export const Modal = styled.div`
         height: 100%;
         background-color: rgba(0, 0, 0, 0.8);
     }
+
 `
 
 export const ModalContent = styled.div`
@@ -94,6 +95,11 @@ export const ModalContent = styled.div`
         right: 0;
         padding: 8px; 
     }
+
+    @media (max-width: ${breackpoints.desktop}){
+        margin: 0 24px;
+    }
+
 `
 export const TitleModal = styled.h2`
     font-size: 18px;

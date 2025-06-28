@@ -6,6 +6,11 @@ export const colors = {
     orange_rose:'#E66767',
 }
 
+export const breackpoints = {
+    desktop: '1024px',
+    tablet: '768px'
+  }
+
 const EstiloGlobal = createGlobalStyle`
     *{
         margin: 0;
@@ -25,7 +30,17 @@ const EstiloGlobal = createGlobalStyle`
             margin: auto;
             max-width: 1024px;
             width: 100%;
+            box-sizing: border-box;
+
+            @media (max-width:${breackpoints.desktop}){
+                padding: 0 16px;
+            }
+
+            @media (max-width: ${breackpoints.tablet}){
+                max-width: 570px;
+            }
         }
+
             
     }
 `
