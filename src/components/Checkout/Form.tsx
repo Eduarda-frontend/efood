@@ -55,12 +55,12 @@ const FormCard = ({ price, stageCart }: Props) => {
 
 			cardName: Yup.string().required("* O campo é obrigatório"),
 			cardNumber: Yup.string()
-				.min(15, "O numero do cartão precisa ter no mínimo 15 caracteres")
-				.max(16, "O numero do cartão precisa ter no máximo 16 caracteres")
+				.min(16, "O numero do cartão precisa ter 16 caracteres")
+				.max(16, "O numero do cartão precisa ter 16 caracteres")
 				.required("* O campo é obrigatório"),
 			cardCode: Yup.string()
-				.min(3, "O codigo de segurança precisa ter no mínimo 3 caracteres")
-				.max(4, "O codigo de segurança precisa ter no máximo 4 caracteres")
+				.min(3, "O codigo de segurança precisa ter 3 caracteres")
+				.max(3, "O codigo de segurança precisa ter 4 caracteres")
 				.required("* O campo é obrigatório"),
 			expiresMonth: Yup.string()
 				.min(2, "O mês precisa ter 2 caracteres")
