@@ -25,6 +25,8 @@ export const Item = styled.li`
     flex-direction: row;
     padding: 8px;
     position: relative;
+    margin-bottom: 16px;
+
 
     button{
         background-image: url(${excluir});
