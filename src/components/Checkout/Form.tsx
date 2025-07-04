@@ -54,10 +54,22 @@ const FormCard = ({ price, stageCart }: Props) => {
 			number: Yup.string().required("* O campo é obrigatório"),
 
 			cardName: Yup.string().required("* O campo é obrigatório"),
-			cardNumber: Yup.string().required("* O campo é obrigatório"),
-			cardCode: Yup.string().required("* O campo é obrigatório"),
-			expiresMonth: Yup.string().required("* O campo é obrigatório"),
-			expiresYear: Yup.string().required("* O campo é obrigatório"),
+			cardNumber: Yup.string()
+				.min(15, "O numero do cartão precisa ter no mínimo 15 caracteres")
+				.max(16, "O numero do cartão precisa ter no máximo 16 caracteres")
+				.required("* O campo é obrigatório"),
+			cardCode: Yup.string()
+				.min(3, "O codigo de segurança precisa ter no mínimo 3 caracteres")
+				.max(4, "O codigo de segurança precisa ter no máximo 4 caracteres")
+				.required("* O campo é obrigatório"),
+			expiresMonth: Yup.string()
+				.min(2, "O mês precisa ter 2 caracteres")
+				.max(2, "O mês precisa ter 2 caracteres")
+				.required("* O campo é obrigatório"),
+			expiresYear: Yup.string()
+				.min(4, "O ano precisa ter 4 caracteres")
+				.max(4, "O ano precisa ter 4 caracteres")
+				.required("* O campo é obrigatório"),
 		}),
 
 		onSubmit: (values) => {
