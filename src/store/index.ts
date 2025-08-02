@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import  apiRestaurant  from '../services/apiRestaurant'
-import apiViacep from '../services/apiViaCep'
+import apiViacep from '../services/apiViacep'
 
 import cartReducer from './reducer/cart'
 

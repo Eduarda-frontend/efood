@@ -12,7 +12,7 @@ import { usePurchaseMutation } from "../../services/apiRestaurant";
 import { ButtonStyled } from "../Button/styles";
 import { DivRow, PedidoFinalizado } from "./styles";
 import { ContainerButton } from "../Aside/styles";
-import { useLazyGetCepQuery } from "../../services/apiViaCep";
+import { useLazyGetCepQuery } from "../../services/apiViacep";
 import ModalAviso from "../Modal/AvisoModal";
 
 type Props = {
