@@ -1,15 +1,20 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import type { MenuItem } from "../../components/List/ListMenu"
 
+type CartItem = MenuItem &{
+    amount: number
+}
+
 type CartState = {
-    items: MenuItem[]
+    items: CartItem[]
     isOpen: boolean
+    amount:number
 }
 
 const initialState: CartState = {
     items: [],
-    isOpen: false
-
+    isOpen: false,
+    amount: 0
 }
 
 const cartSlice = createSlice({
@@ -19,14 +24,29 @@ const cartSlice = createSlice({
         add: (state, action: PayloadAction<MenuItem>) => {
             const plate = state.items.find((item) => item.id === action.payload.id)
 
-            if(!plate) {
-                state.items.push(action.payload)
+            if(plate) {
+                plate.amount++
             } else {
-                alert('Este prato já foi adicionado ao carrinho!')
+                state.items.push({ ...action.payload, amount: 1})
             }
+            state.amount++
         },
         remove: (state, action: PayloadAction<number>) => {
-            state.items = state.items.filter((item) => item.id !== action.payload)
+            const indexItem = state.items.findIndex((item) => item.id === action.payload)
+            
+            if (indexItem !== -1) {
+                const item = state.items[indexItem]
+
+                if (item.amount > 1) {
+                    item.amount--
+                } else {
+                    state.items.splice(indexItem, 1)
+                }
+
+                if (state.amount > 0){
+                    state.amount--
+                }
+            }
         },
         open: (state) => {
             state.isOpen = true
@@ -36,6 +56,7 @@ const cartSlice = createSlice({
         },
         clear: (state) => {
             state.items = []
+            state.amount = 0
         }
     }
 

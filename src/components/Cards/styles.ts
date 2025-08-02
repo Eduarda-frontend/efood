@@ -120,3 +120,18 @@ export const ImgModal = styled.img`
     object-fit: cover;
     margin-right: 24px;
 `
+
+export const Aviso = styled.div`
+    background-color: #19e619;
+    position: absolute;
+    top:0;
+    width: 100%;
+    justify-content: center;
+    padding: 8px;
+    display: none;
+    z-index: 1;
+
+    &.warning{
+        display: flex;
+    }
+`

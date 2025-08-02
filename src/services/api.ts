@@ -6,7 +6,7 @@ type Product = {
     price: number
 }
 
-type PurchasePayload = {
+export type PurchasePayload = {
     products: Product[]
     delivery: {
         receiver: string,
@@ -36,8 +36,9 @@ type PurchaseResponse = {
 }
 
 const api = createApi({
+    reducerPath:'apiRestaurant',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://fake-api-tau.vercel.app/api/efood/'
+        baseUrl: 'https://ebac-fake-api.vercel.app/api/efood/'
     }),
     endpoints: (builder) => ({
         getMenu: builder.query<RestaurantItem, string>({

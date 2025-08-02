@@ -14,9 +14,6 @@ export const DivTotalValue = styled.div`
         font-size: 14px;
         margin: 0; 
     }
-
-    
-
 `
 export const Item = styled.li`
     background-color: ${colors.light_orange};
@@ -28,7 +25,7 @@ export const Item = styled.li`
     margin-bottom: 16px;
 
 
-    button{
+    > button{
         background-image: url(${excluir});
         position: absolute;
         bottom: 8px;
@@ -44,4 +41,29 @@ export const Item = styled.li`
             color:${colors.orange_rose};    
         }
     } 
+    
 `  
+export const Amount = styled.div`
+        display: flex;
+        padding-top: 11px;
+        font-size: 12px;
+
+        p{
+            padding: 0 8px;
+            background-color: ${colors.white};
+        }
+
+        > button {
+            width: 16px;
+            height: 16px;
+            background-color:${colors.orange_rose};    
+            border: none;
+            color: ${colors.white};
+            font-weight: bold;  
+            cursor: pointer;
+
+            &:active{
+                background-color: ${colors.light_orange};
+            }
+        }
+`

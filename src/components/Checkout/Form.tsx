@@ -50,9 +50,8 @@ const FormCard = ({ price, stageCart }: Props) => {
 			cep: Yup.string()
 				.min(9, "O cep precisa ter 9 caracteres")
 				.max(10, "O cep precisa ter 9 caracteres")
-				.required("* O campo é obrigatório"),
+				.required("*Campo obrigatório"),
 			number: Yup.string().required("* O campo é obrigatório"),
-
 			cardName: Yup.string().required("* O campo é obrigatório"),
 			cardNumber: Yup.string()
 				.min(19, "O numero do cartão precisa ter 16 caracteres")
@@ -61,15 +60,27 @@ const FormCard = ({ price, stageCart }: Props) => {
 			cardCode: Yup.string()
 				.min(3, "O CVV precisa ter 3 caracteres")
 				.max(3, "O CVV precisa ter 3 caracteres")
-				.required("* O campo é obrigatório"),
+				.required("*Campo obrigatório"),
 			expiresMonth: Yup.string()
 				.min(2, "O mês precisa ter 2 caracteres")
 				.max(2, "O mês precisa ter 2 caracteres")
-				.required("* O campo é obrigatório"),
+				.matches(/^(0[1-9]|1[0-2])$/, "*Mês inválido. Use valores de 01 a 12")
+				.required("* O campo é obrigatório")
+				.test("mês-valido", "*O vencimento deve ser após o mês atual.", (value) => {
+					const mes = parseInt(value, 10)
+					if(isNaN(mes) || mes > 1 && mes <= 12){
+
+						const mesAtual = new Date().getMonth() + 1
+						return mes > mesAtual			
+					}
+				}),
 			expiresYear: Yup.string()
+				.required("* O campo é obrigatório")
 				.min(4, "O ano precisa ter 4 caracteres")
-				.max(4, "O ano precisa ter 4 caracteres")
-				.required("* O campo é obrigatório"),
+				.test("ano-valido", "*Ano não pode ser no passado", (value) => {
+					const ano = parseInt(value, 10)
+					return ano >= new Date().getFullYear()
+				})
 		}),
 
 		onSubmit: (values) => {
@@ -176,6 +187,7 @@ const FormCard = ({ price, stageCart }: Props) => {
 								onChange={form.handleChange}
 								onBlur={form.handleBlur}
 								mask="00000-000"
+								placeholder="00000-000"
 
 							/>
 							{checkInputHasError("cep") && (
@@ -208,18 +220,23 @@ const FormCard = ({ price, stageCart }: Props) => {
 					/>
 
 						<ContainerButton>
-							<ButtonStyled title="Clique aqui para continuar com o pagamento" type="button"  onClick={() => {
-								if (form.dirty) {
-									setStage("payment");
-								} else {
-								    form.setTouched({
-										fullName: true,
-										address: true,
-										city: true,
-										cep: true,
-										number: true,
-									  });
-								}
+							<ButtonStyled title="Clique aqui para continuar com o pagamento" 
+							type="button"  
+							onClick={() => {// Marca todos os campos como tocados
+								form.setTouched({
+									fullName: true,
+									address: true,
+									city: true,
+									cep: true,
+									number: true,
+									}, true);
+								//   So avança caso os campos obrigatórios do formulário estejam válidos
+									if(form.values.fullName &&
+									form.values.address &&
+									form.values.city &&
+									form.values.cep &&
+									form.values.number	
+									) {setStage("payment")}
 							}}> Continuar com o pagamento</ButtonStyled>
 							<ButtonStyled title="Clique aqui pra voltar ao carrinho" type="button" onClick={stageCart}>Voltar para o carrinho</ButtonStyled>
 						</ContainerButton>

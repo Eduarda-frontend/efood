@@ -23,13 +23,18 @@ const getDescription = (description: string) => {
 const Menu = ({ plate, isLoading } : MenuProps) => {
     const dispatch = useDispatch()
     const [ modalIsVisible, setModalIsVisible] = useState(false)
+    const [addItem, setAddItem] = useState(false)
 
     const openModal = () => setModalIsVisible(true)
     const closeModal = () => setModalIsVisible(false)
     
     const addCart = () => {
         dispatch(add(plate))
-        closeModal()
+        setAddItem(true)
+
+        setTimeout(() => {
+            setAddItem(false)
+          }, 2000)
     }
 
     
@@ -50,6 +55,7 @@ const Menu = ({ plate, isLoading } : MenuProps) => {
                 </S.CardText>
             </S.Card>
             <S.Modal className={modalIsVisible ? 'show' : ''}>
+            <S.Aviso className={addItem ? 'warning' : ''}> +1 produto foi adicionado ao carrinho</S.Aviso>
                 <S.ModalContent>
                     <img
                     src={close}

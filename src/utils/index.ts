@@ -1,8 +1,6 @@
-import type { MenuItem } from "../components/List/ListMenu"
-
-export const getTotalValue = (items: MenuItem[]) => {
-return items.reduce((accumulator, currentValue) => {
-    return (accumulator += currentValue.preco)
+export const getTotalValue = (items: { preco:number, amount: number }[]) => {
+return items.reduce((accumulator, item) => {
+    return (accumulator += item.preco * item.amount)
 }, 0)
 }
 
