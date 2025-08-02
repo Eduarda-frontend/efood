@@ -1,4 +1,4 @@
-import { useGetPlateQuery } from '../../services/api'
+import { useGetPlateQuery } from '../../services/apiRestaurant'
 import Restaurant from '../Cards/Restaurant'
 import Loader from '../Loader/Index'
 import type { MenuItem } from './ListMenu'

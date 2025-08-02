@@ -7,11 +7,12 @@ import * as Yup from "yup";
 
 import { clear, close } from "../../store/reducer/cart";
 import type { RootReducer } from "../../store";
-import { usePurchaseMutation } from "../../services/api";
+import { usePurchaseMutation } from "../../services/apiRestaurant";
 
 import { ButtonStyled } from "../Button/styles";
 import { DivRow, PedidoFinalizado } from "./styles";
 import { ContainerButton } from "../Aside/styles";
+import { useLazyGetCepQuery } from "../../services/apiViaCep";
 
 type Props = {
 	price: string;
@@ -69,9 +70,8 @@ const FormCard = ({ price, stageCart }: Props) => {
 				.test("mês-valido", "*O vencimento deve ser após o mês atual.", (value) => {
 					const mes = parseInt(value, 10)
 					if(isNaN(mes) || mes > 1 && mes <= 12){
-
 						const mesAtual = new Date().getMonth() + 1
-						return mes > mesAtual			
+						return mes > mesAtual && mes <= 12	
 					}
 				}),
 			expiresYear: Yup.string()
@@ -82,7 +82,6 @@ const FormCard = ({ price, stageCart }: Props) => {
 					return ano >= new Date().getFullYear()
 				})
 		}),
-
 		onSubmit: (values) => {
 			purchase({
 				products: items.map((item) => ({
@@ -129,8 +128,35 @@ const FormCard = ({ price, stageCart }: Props) => {
 		navigate('/')
 	}
 
+	const [fetchCep] = useLazyGetCepQuery()
+	const handleCepBlur = async () => {
+		const cep = form.values.cep.replace(/\D/g, '');
+
+		if(cep.length === 8){
+			try {
+				const result = await fetchCep(cep).unwrap()
+				
+				if(result.erro) {
+					alert("CEP não encontrado.");
+					return
+				}
+			
+				if(!result.logradouro && !result.localidade) {
+					alert("Endereço indisponível para este cep.")
+					return
+				} 
+				form.setFieldValue('address', result.logradouro || '')
+				form.setFieldValue('city', result.localidade || '')
+			} catch(err) {
+				alert("Erro ao buscar o CEP.")
+				console.error(err)
+			}
+		}
+	}
+
+
 	return (
-		<>
+		<>		  
 			{stage === "delivery" && (
 				<form onSubmit={form.handleSubmit}>
 					<h2>Entrega</h2>
@@ -185,10 +211,11 @@ const FormCard = ({ price, stageCart }: Props) => {
 								name="cep"
 								value={form.values.cep}
 								onChange={form.handleChange}
-								onBlur={form.handleBlur}
+								onBlur={handleCepBlur}
 								mask="00000-000"
 								placeholder="00000-000"
-
+								autoFocus
+								
 							/>
 							{checkInputHasError("cep") && (
 								<p>{form.errors.cep}</p>

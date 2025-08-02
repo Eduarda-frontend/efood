@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 
 import Menu from '../Cards/Menu'
-import { useGetMenuQuery } from '../../services/api'
+import { useGetMenuQuery } from '../../services/apiRestaurant'
 import Banner from '../Banner'
 
 import { ListCard } from './styles'
