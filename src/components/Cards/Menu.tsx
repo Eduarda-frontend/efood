@@ -3,13 +3,11 @@ import { useDispatch } from "react-redux"
 
 import { add } from "../../store/reducer/cart"
 import type { MenuItem } from "../List/ListMenu"
-import { formatPrice } from "../../utils"
-
-import close from '../../assets/close.png'
 
 import * as S from "./styles"
 import { ButtonStyled } from "../Button/styles"
 import Loader from "../Loader/Index"
+import Modal from "../Modal/Modal"
 
 type MenuProps = {
     plate: MenuItem
@@ -54,29 +52,13 @@ const Menu = ({ plate, isLoading } : MenuProps) => {
                     <ButtonStyled title="Clique para ver mais detalhes" onClick={openModal}> Mais Detalhes </ButtonStyled>
                 </S.CardText>
             </S.Card>
-            <S.Modal className={modalIsVisible ? 'show' : ''}>
-            <S.Aviso className={addItem ? 'warning' : ''}> +1 produto foi adicionado ao carrinho</S.Aviso>
-                <S.ModalContent>
-                    <img
-                    src={close}
-                    alt="Ícone de fechar"
-                    onClick={closeModal} />
-                    <div>
-                        <S.ImgModal src={plate.foto} alt={plate.nome} />
-                        <div>
-                            <S.TitleModal>{plate.nome}</S.TitleModal>
-                            <S.DivText>                        
-                                <p>{plate.descricao} </p> 
-                                <p>{plate.porcao?.includes(' a ') ? `Serve: de  ${plate.porcao}` : `Serve: ${plate.porcao}` }</p>
-                            </S.DivText>
-                            <ButtonStyled title="Clique aqui para adicionar ao carrinho" onClick={addCart}> Adicionar ao carrinho {formatPrice(plate.preco)} </ButtonStyled>
-                        </div>
-                    </div>
-                </S.ModalContent>
-                <div onClick={closeModal}
-                className="overlay">
-                </div>
-            </S.Modal>
+            <Modal
+              modalIsVisible={modalIsVisible}
+              addItem={addItem}
+              plate={plate}
+              closeModal={closeModal}
+              addCart={addCart}
+            />
         </>
     )
 }

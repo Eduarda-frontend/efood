@@ -13,6 +13,7 @@ import { ButtonStyled } from "../Button/styles";
 import { DivRow, PedidoFinalizado } from "./styles";
 import { ContainerButton } from "../Aside/styles";
 import { useLazyGetCepQuery } from "../../services/apiViaCep";
+import ModalAviso from "../Modal/AvisoModal";
 
 type Props = {
 	price: string;
@@ -25,6 +26,8 @@ const FormCard = ({ price, stageCart }: Props) => {
 	const [stage, setStage] = useState<"delivery" | "payment">("delivery");
 	const { items } = useSelector((state: RootReducer) => state.cart);
 	const [purchase, { data, isSuccess }] = usePurchaseMutation();
+	const [cepError, setCepError] = useState("");
+	const [isCepModalOpen, setIsCepModalOpen] = useState(false);
 
 	const form = useFormik({
 		initialValues: {
@@ -52,7 +55,7 @@ const FormCard = ({ price, stageCart }: Props) => {
 				.min(9, "O cep precisa ter 9 caracteres")
 				.max(10, "O cep precisa ter 9 caracteres")
 				.required("*Campo obrigatório"),
-			number: Yup.string().required("* O campo é obrigatório"),
+
 			cardName: Yup.string().required("* O campo é obrigatório"),
 			cardNumber: Yup.string()
 				.min(19, "O numero do cartão precisa ter 16 caracteres")
@@ -91,8 +94,8 @@ const FormCard = ({ price, stageCart }: Props) => {
 				delivery: {
 					receiver: values.fullName,
 					address: {
-						descpription: values.complement,
-						cidy: values.city,
+						description: values.complement,
+						city: values.city,
 						zipCode: values.cep,
 						number: Number(values.number),
 						complement: values.complement,
@@ -129,6 +132,7 @@ const FormCard = ({ price, stageCart }: Props) => {
 	}
 
 	const [fetchCep] = useLazyGetCepQuery()
+
 	const handleCepBlur = async () => {
 		const cep = form.values.cep.replace(/\D/g, '');
 
@@ -136,20 +140,18 @@ const FormCard = ({ price, stageCart }: Props) => {
 			try {
 				const result = await fetchCep(cep).unwrap()
 				
-				if(result.erro) {
-					alert("CEP não encontrado.");
-					return
-				}
-			
-				if(!result.logradouro && !result.localidade) {
-					alert("Endereço indisponível para este cep.")
+				if(result.erro || (!result.logradouro && !result.localidade)) {
+					setCepError("CEP inválido ou não encontrado.");
+					setIsCepModalOpen(true);
 					return
 				} 
 				form.setFieldValue('address', result.logradouro || '')
 				form.setFieldValue('city', result.localidade || '')
-			} catch(err) {
-				alert("Erro ao buscar o CEP.")
-				console.error(err)
+				form.setFieldValue('complement', result.complemento || '')
+
+			} catch {
+				setCepError("Erro ao buscar o CEP.");
+				setIsCepModalOpen(true);
 			}
 		}
 	}
@@ -236,7 +238,7 @@ const FormCard = ({ price, stageCart }: Props) => {
 						<p>{form.errors.number}</p>
 					)}
 
-					<label htmlFor="complement">Complemento (opicional)</label>
+					<label htmlFor="complement">Complemento (opcional)</label>
 					<input
 						type="text"
 						id="complement"
@@ -269,6 +271,9 @@ const FormCard = ({ price, stageCart }: Props) => {
 						</ContainerButton>
 				</form>
 			)}
+				{isCepModalOpen && (
+					<ModalAviso isOpen={isCepModalOpen} cepError={cepError} closeModal={() => setIsCepModalOpen(false)}/>
+				)}
 			{stage === "payment" && (
 				<>
 					{isSuccess && data ? (

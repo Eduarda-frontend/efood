@@ -11,8 +11,8 @@ export type PurchasePayload = {
     delivery: {
         receiver: string,
         address: {
-            descpription: string
-            cidy: string
+            description: string
+            city: string
             zipCode: string
             number: number
             complement: string

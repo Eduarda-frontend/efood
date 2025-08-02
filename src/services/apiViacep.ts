@@ -4,6 +4,7 @@ type AddressResponse = {
     cep: string;
     logradouro: string;
     localidade: string;
+    complemento: string;
     erro?: boolean;
   };
 
