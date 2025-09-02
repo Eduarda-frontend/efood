@@ -70,52 +70,64 @@ const FormCard = ({ price, stageCart }: Props) => {
 				.max(2, "O mês precisa ter 2 caracteres")
 				.matches(/^(0[1-9]|1[0-2])$/, "*Mês inválido. Use valores de 01 a 12")
 				.required("* O campo é obrigatório")
-				.test("mês-valido", "*O vencimento deve ser após o mês atual.", (value) => {
+				.test("mês-valido", "*O vencimento deve estar entre 1 e 12.", (value) => {
 					const mes = parseInt(value, 10)
-					if(isNaN(mes) || mes > 1 && mes <= 12){
-						const mesAtual = new Date().getMonth() + 1
-						return mes > mesAtual && mes <= 12	
-					}
+					return !isNaN(mes) && mes >= 1 && mes <= 12;
 				}),
 			expiresYear: Yup.string()
 				.required("* O campo é obrigatório")
 				.min(4, "O ano precisa ter 4 caracteres")
-				.test("ano-valido", "*Ano não pode ser no passado", (value) => {
-					const ano = parseInt(value, 10)
-					return ano >= new Date().getFullYear()
+				.test("ano-valido", "*Ano não pode ser no passado", function(value) {
+					const { expiresMonth } = this.parent;
+
+					const mes = parseInt(expiresMonth, 10);
+					const ano = parseInt(value, 10);
+				
+					if (isNaN(mes) || isNaN(ano)) return false;
+				
+					const hoje = new Date();
+					const mesAtual = hoje.getMonth() + 1; // getMonth() começa em 0
+					const anoAtual = hoje.getFullYear();
+				
+					// valida se está no futuro
+					if (ano > anoAtual) return true;
+					if (ano === anoAtual && mes >= mesAtual) return true;
+				
+					return false;
 				})
-		}),
-		onSubmit: (values) => {
-			purchase({
-				products: items.map((item) => ({
-					id: item.id,
-					price: item.preco as number,
-				})),
-				delivery: {
-					receiver: values.fullName,
-					address: {
-						description: values.complement,
-						city: values.city,
-						zipCode: values.cep,
-						number: Number(values.number),
-						complement: values.complement,
-					},
-				},
-				payment: {
-					card: {
-						name: values.cardName,
-						number: values.cardNumber,
-						code: Number(values.cardCode),
-						expires: {
-							month: Number(values.expiresMonth),
-							year: Number(values.expiresYear),
+			}),
+			onSubmit: (values) => {
+				purchase({
+					products: items.map((item) => ({
+						id: item.id,
+						price: item.preco as number,
+					})),
+					delivery: {
+						receiver: values.fullName,
+						address: {
+							description: values.complement,
+							city: values.city,
+							zipCode: values.cep,
+							number: Number(values.number),
+							complement: values.complement,
 						},
 					},
-				},
+					payment: {
+						card: {
+							name: values.cardName,
+							number: values.cardNumber,
+							code: Number(values.cardCode),
+							expires: {
+								month: Number(values.expiresMonth),
+								year: Number(values.expiresYear),
+							},
+						},
+					},
 			});
 		},
 	});
-
+	
+	
 	const checkInputHasError = (fieldName: string) => {
 		const isTouched = fieldName in form.touched;
 		const isValid = fieldName in form.errors;
